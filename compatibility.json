@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "serverVersion": "1.0.0",
+  "windowsClient": {
+    "recommended": "1.0.0",
+    "minimum": "1.0.0",
+    "maximum": "1.0.x",
+    "download": "https://github.com/tojollinor/ProjektZeit/releases/download/v1.0.0/ProjektZeit-Setup-1.0.0.exe"
+  }
+}
