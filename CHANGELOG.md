@@ -1,5 +1,14 @@
 # Changelog
 
+## ProjektZeit 1.0.3 — 2026-09-19
+
+- Added full calendar event creation, editing, invitations, responses and company-wide events.
+- Added flexible statistics workbench with scoped date-range analysis and saved views.
+- Added external evidence synchronization and review for Zammad, STARFACE and TeamViewer.
+- Added customer, project and order mapping for external evidence.
+- Added structured audit/security logs and extended operational diagnostics.
+
+
 ## ProjektZeit 1.0.2 — 2026-09-19
 
 - Completed employee master-data views with work models and contact visibility.
