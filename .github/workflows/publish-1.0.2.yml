@@ -1,0 +1,106 @@
+name: Publish ProjektZeit 1.0.2
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".release-trigger-public-1.0.2"
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    if: github.head_ref == 'publish-1.0.2'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout public repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Download verified 1.0.2 installer artifact
+        shell: bash
+        env:
+          INSTALLER_ARCHIVE_URL: "https://sdmntprdenmarkeast.oaiusercontent.com/files/00000000-c890-8210-99bf-847010ae6867/raw?se=2026-09-19T00%3A22%3A25Z&sp=r&sv=2026-02-06&sr=b&scid=229f316b-a28d-5423-a300-a1cdbe3064ca&skoid=d294dba5-36f7-432b-aab8-935656489847&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-18T20%3A16%3A01Z&ske=2026-09-19T20%3A16%3A01Z&sks=b&skv=2026-02-06&sig=5CDgnvcrY0EpAbLSgGEPTASip89QLC5ju3zgIEwiYdY%3D"
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 "$INSTALLER_ARCHIVE_URL" -o installer-1.0.2.zip
+          unzip -o installer-1.0.2.zip
+          test -f ProjektZeit-Setup-1.0.2.exe
+
+      - name: Prepare public 1.0.2 distribution
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f ProjektZeit-Setup-1.0.0.exe ProjektZeit-Setup-1.0.1.exe installer.zip installer-1.0.2.zip
+          cat > version.json <<'JSON'
+          {
+            "product": "ProjektZeit",
+            "release": "1.0.2",
+            "server": "1.0.2",
+            "windowsClient": "1.0.2",
+            "published": "2026-09-19"
+          }
+          JSON
+          cat > compatibility.json <<'JSON'
+          {
+            "schemaVersion": 1,
+            "serverVersion": "1.0.2",
+            "windowsClient": {
+              "recommended": "1.0.2",
+              "minimum": "1.0.2",
+              "maximum": "1.0.x",
+              "download": "https://github.com/tojollinor/ProjektZeit/releases/download/v1.0.2/ProjektZeit-Setup-1.0.2.exe"
+            }
+          }
+          JSON
+          sed -i 's/^PROJEKTZEIT_VERSION=.*/PROJEKTZEIT_VERSION=1.0.2/' .env.example
+          python - <<'PY'
+          from pathlib import Path
+          path = Path("CHANGELOG.md")
+          text = path.read_text(encoding="utf-8")
+          heading = "## ProjektZeit 1.0.2 — 2026-09-19"
+          if heading not in text:
+              entry = """## ProjektZeit 1.0.2 — 2026-09-19
+
+          - Completed employee master-data views with work models and contact visibility.
+          - Added full administrator user management including role assignment, activation and password reset.
+          - Added editable role and permission management in the web interface.
+          - Added customer detail editing, archiving and customer contacts including Zammad and TeamViewer mappings.
+          - Added project detail editing, lifecycle controls and project-member management.
+
+          """
+              text = text.replace("# Changelog\n", "# Changelog\n\n" + entry, 1)
+              path.write_text(text, encoding="utf-8")
+          PY
+          sha256sum ProjektZeit-Setup-1.0.2.exe > SHA256SUMS.txt
+          if find . -path './.git' -prune -o -type f \( -name '*.map' -o -name '*.py' -o -name '*.ts' -o -name '*.tsx' -o -name '*.cs' \) -print | grep -q .; then
+            echo "Application source or source maps detected in public distribution." >&2
+            exit 1
+          fi
+
+      - name: Commit public distribution
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "ProjektZeit Release Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Release 1.0.2"
+            git push origin HEAD:main
+          fi
+
+      - name: Publish GitHub release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view v1.0.2 --repo tojollinor/ProjektZeit >/dev/null 2>&1; then
+            gh release upload v1.0.2 ProjektZeit-Setup-1.0.2.exe SHA256SUMS.txt --repo tojollinor/ProjektZeit --clobber
+          else
+            gh release create v1.0.2 ProjektZeit-Setup-1.0.2.exe SHA256SUMS.txt               --repo tojollinor/ProjektZeit               --title "ProjektZeit 1.0.2"               --notes "ProjektZeit 1.0.2. Masterplan Block 3/5: Stammdaten, Mitarbeiter, Rollen/Rechte, Kunden und Projekte."
+          fi
