@@ -1,5 +1,18 @@
 # Changelog
 
+## ProjektZeit 1.0.5 — 2026-09-19
+
+- Reconciled the Greenfield build against pre-reset product requirements and restored missing workflows.
+- Replaced native browser prompts and Windows MessageBox flows with consistent ProjektZeit-owned dialogs and added regression guards.
+- Restored direct work-time corrections with pauses, audit history and billed-time protection.
+- Added linked payroll reversal entries and explicit project billing handoff/reopen workflows.
+- Restored profile editing, avatar, theme selection, holiday-region defaults, API tokens and CSV import/export.
+- Restored admin MFA reset UI, individual permission overrides, optional first-password change and policy-controlled remember-me login.
+- Restored customer/project history, evidence-to-customer suggestions, Zammad owner filters, provider column settings and TeamViewer token help.
+- Restored grouped STARFACE missed calls with persistent callback status and compact notification indicators.
+- Restored a responsive month calendar and expanded regression coverage for the reconciled workflows.
+
+
 ## ProjektZeit 1.0.4 — 2026-09-19
 
 - Completed the Greenfield master-plan acceptance pass and added a persistent master-plan status checklist.
