@@ -1,5 +1,14 @@
 # Changelog
 
+## ProjektZeit 1.0.2 — 2026-09-19
+
+- Completed employee master-data views with work models and contact visibility.
+- Added full administrator user management including role assignment, activation and password reset.
+- Added editable role and permission management in the web interface.
+- Added customer detail editing, archiving and customer contacts including Zammad and TeamViewer mappings.
+- Added project detail editing, lifecycle controls and project-member management.
+
+
 ## ProjektZeit 1.0.1 — 2026-09-19
 
 - Completed absence, on-call, notification, attachment and branding workflows.
