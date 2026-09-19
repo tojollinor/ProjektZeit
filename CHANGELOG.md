@@ -1,5 +1,19 @@
 # Changelog
 
+## ProjektZeit 1.0.4 — 2026-09-19
+
+- Completed the Greenfield master-plan acceptance pass and added a persistent master-plan status checklist.
+- Added Dienstreisen with travel periods, overnight stays and provided meals.
+- Added real notification delivery for SMTP e-mail, browser Web Push and Pushover.
+- Added personal and company Pushover configuration, browser push registration and channel preferences.
+- Completed account security settings for passkeys, TOTP, recovery codes and session revocation.
+- Completed editable company, work-time, SMTP, time-category and absence-type settings.
+- Hardened production startup, trusted hosts, security headers and readiness diagnostics.
+- Added automatic Alembic upgrades at container startup and upgrade grants for existing bookkeeping roles.
+- Expanded the Windows client with order stop, notifications, tray alerts and update checks.
+- Added server permission auditing and full Docker-based Chromium E2E coverage for desktop and mobile.
+
+
 ## ProjektZeit 1.0.3 — 2026-09-19
 
 - Added full calendar event creation, editing, invitations, responses and company-wide events.
