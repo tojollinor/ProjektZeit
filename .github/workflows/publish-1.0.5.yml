@@ -1,0 +1,114 @@
+name: Publish ProjektZeit 1.0.5
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".release-trigger-public-1.0.5"
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    if: github.head_ref == 'publish-1.0.5'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout public repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Download verified 1.0.5 installer artifact
+        shell: bash
+        env:
+          INSTALLER_ARCHIVE_URL: "https://sdmntprnortheu.oaiusercontent.com/files/00000000-68d4-81f4-8536-bbfa4d14b57b/raw?se=2026-09-19T05%3A10%3A20Z&sp=r&sv=2026-02-06&sr=b&scid=dca26698-50ef-53c5-adff-b2d0db2b475f&skoid=002823aa-689d-47ca-9347-108c20f4f00d&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-18T20%3A22%3A20Z&ske=2026-09-19T20%3A22%3A20Z&sks=b&skv=2026-02-06&sig=qjjdC18BZBmOEFm2dIQwDNEcY/Zi%2BytIz78dtVwKmes%3D"
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 "$INSTALLER_ARCHIVE_URL" -o installer-1.0.5.zip
+          unzip -o installer-1.0.5.zip
+          test -f ProjektZeit-Setup-1.0.5.exe
+
+      - name: Prepare public 1.0.5 distribution
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f ProjektZeit-Setup-1.0.0.exe ProjektZeit-Setup-1.0.1.exe ProjektZeit-Setup-1.0.2.exe ProjektZeit-Setup-1.0.3.exe ProjektZeit-Setup-1.0.4.exe
+          rm -f installer*.zip
+          cat > version.json <<'JSON'
+          {
+            "product": "ProjektZeit",
+            "release": "1.0.5",
+            "server": "1.0.5",
+            "windowsClient": "1.0.5",
+            "published": "2026-09-19"
+          }
+          JSON
+          cat > compatibility.json <<'JSON'
+          {
+            "schemaVersion": 1,
+            "serverVersion": "1.0.5",
+            "windowsClient": {
+              "recommended": "1.0.5",
+              "minimum": "1.0.5",
+              "maximum": "1.0.x",
+              "download": "https://github.com/tojollinor/ProjektZeit/releases/download/v1.0.5/ProjektZeit-Setup-1.0.5.exe"
+            }
+          }
+          JSON
+          sed -i 's/^PROJEKTZEIT_VERSION=.*/PROJEKTZEIT_VERSION=1.0.5/' .env.example
+          python - <<'PY'
+          from pathlib import Path
+          path = Path("CHANGELOG.md")
+          text = path.read_text(encoding="utf-8")
+          heading = "## ProjektZeit 1.0.5 — 2026-09-19"
+          if heading not in text:
+              entry = """## ProjektZeit 1.0.5 — 2026-09-19
+
+          - Reconciled the Greenfield build against pre-reset product requirements and restored missing workflows.
+          - Replaced native browser prompts and Windows MessageBox flows with consistent ProjektZeit-owned dialogs and added regression guards.
+          - Restored direct work-time corrections with pauses, audit history and billed-time protection.
+          - Added linked payroll reversal entries and explicit project billing handoff/reopen workflows.
+          - Restored profile editing, avatar, theme selection, holiday-region defaults, API tokens and CSV import/export.
+          - Restored admin MFA reset UI, individual permission overrides, optional first-password change and policy-controlled remember-me login.
+          - Restored customer/project history, evidence-to-customer suggestions, Zammad owner filters, provider column settings and TeamViewer token help.
+          - Restored grouped STARFACE missed calls with persistent callback status and compact notification indicators.
+          - Restored a responsive month calendar and expanded regression coverage for the reconciled workflows.
+
+          """
+              text = text.replace("# Changelog\n", "# Changelog\n\n" + entry, 1)
+              path.write_text(text, encoding="utf-8")
+          PY
+          sha256sum ProjektZeit-Setup-1.0.5.exe > SHA256SUMS.txt
+          if find . -path './.git' -prune -o -type f \( -name '*.map' -o -name '*.py' -o -name '*.ts' -o -name '*.tsx' -o -name '*.cs' \) -print | grep -q .; then
+            echo "Application source or source maps detected in public distribution." >&2
+            exit 1
+          fi
+
+      - name: Commit public distribution
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "ProjektZeit Release Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Release 1.0.5"
+            git push origin HEAD:main
+          fi
+
+      - name: Publish GitHub release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view v1.0.5 --repo tojollinor/ProjektZeit >/dev/null 2>&1; then
+            gh release upload v1.0.5 ProjektZeit-Setup-1.0.5.exe SHA256SUMS.txt --repo tojollinor/ProjektZeit --clobber
+          else
+            gh release create v1.0.5 ProjektZeit-Setup-1.0.5.exe SHA256SUMS.txt \
+              --repo tojollinor/ProjektZeit \
+              --title "ProjektZeit 1.0.5" \
+              --notes "ProjektZeit 1.0.5. Masterplan-Reconciliation, eigene Dialoge, Zeitkorrekturen, Integrations- und Release-Fixes."
+          fi
