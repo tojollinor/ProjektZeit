@@ -24,6 +24,7 @@ services:
     environment:
       APP_URL: ${APP_URL}
       APP_SECRET_KEY: ${APP_SECRET_KEY}
+      PROJEKTZEIT_VERSION: ${PROJEKTZEIT_VERSION}
       DATABASE_URL: postgresql+psycopg://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
       STORAGE_PATH: /data/files
       BOOTSTRAP_ADMIN_FIRST_NAME: ${BOOTSTRAP_ADMIN_FIRST_NAME}
