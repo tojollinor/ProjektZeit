@@ -1,5 +1,11 @@
 # Changelog
 
+## ProjektZeit 1.0.6 — 2026-09-23
+
+- Fixed failed-login handling on PostgreSQL so the first invalid login returns HTTP 401 instead of HTTP 500.
+- Hardened login-lock counters against legacy NULL values and added database-level defaults plus a migration.
+- Added regression coverage for fresh and legacy login-lock rows.
+
 ## ProjektZeit 1.0.5 — 2026-09-22
 
 - Reconciled the Greenfield build against the agreed product requirements and restored missing workflows.

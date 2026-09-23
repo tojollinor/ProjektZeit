@@ -43,9 +43,18 @@ jobs:
             if ! gh release view "${windows_tag}" >/dev/null 2>&1; then
               gh release create "${windows_tag}"                 --target main                 --title "ProjektZeit ${windows_version}"                 --notes "ProjektZeit ${windows_version}. Installation und Prüfsumme; der Anwendungsquellcode bleibt im privaten Source-Repository."
             fi
-            if [ -f SHA256SUMS.txt ]; then
-              gh release upload "${windows_tag}" "${installer}" SHA256SUMS.txt --clobber
+
+            assets="$(gh release view "${windows_tag}" --json assets --jq '.assets[].name' || true)"
+            if ! grep -Fxq "${installer}" <<<"${assets}"; then
+              gh release upload "${windows_tag}" "${installer}"
             else
-              gh release upload "${windows_tag}" "${installer}" --clobber
+              echo "${installer} is already attached to ${windows_tag}."
+            fi
+            if [ -f SHA256SUMS.txt ]; then
+              if ! grep -Fxq "SHA256SUMS.txt" <<<"${assets}"; then
+                gh release upload "${windows_tag}" SHA256SUMS.txt
+              else
+                echo "SHA256SUMS.txt is already attached to ${windows_tag}."
+              fi
             fi
           fi
