@@ -1,5 +1,15 @@
 # Changelog
 
+## ProjektZeit 1.0.7 — 2026-09-23
+
+- Replaced remaining PZ placeholders with the ProjektZeit product logo and completed PWA/browser icon branding.
+- Reorganized settings into personal, data/tooling and permission-aware Admin-Optionen sections.
+- Added optional project/order assignment for expenses with server-side visibility and consistency validation.
+- Made customer, project, order and employee rows directly keyboard- and mouse-accessible and added direct entity navigation from global search.
+- Added a real order detail view while preserving permission checks and existing row actions.
+- Unified card, panel, control and dialog surface radii across light, dark and mobile layouts without changing Dashboard editor behavior.
+- Expanded frontend regression coverage and CI to run Vitest before the production web build.
+
 ## ProjektZeit 1.0.6 — 2026-09-23
 
 - Fixed failed-login handling on PostgreSQL so the first invalid login returns HTTP 401 instead of HTTP 500.
