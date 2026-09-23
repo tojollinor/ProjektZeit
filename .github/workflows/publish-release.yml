@@ -1,0 +1,51 @@
+name: Publish public release
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'version.json'
+      - 'compatibility.json'
+      - 'ProjektZeit-Setup-*.exe'
+      - 'SHA256SUMS.txt'
+      - '.github/workflows/publish-release.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Publish release metadata and Windows asset
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          version="$(jq -r '.release' version.json)"
+          windows_version="$(jq -r '.windowsClient' version.json)"
+          test -n "${version}"
+          test -n "${windows_version}"
+
+          release_tag="v${version}"
+          if ! gh release view "${release_tag}" >/dev/null 2>&1; then
+            gh release create "${release_tag}"               --target main               --title "ProjektZeit ${version}"               --notes "ProjektZeit ${version}. Server-/Distributionsstand; der Anwendungsquellcode bleibt im privaten Source-Repository."
+          fi
+
+          installer="ProjektZeit-Setup-${windows_version}.exe"
+          windows_tag="v${windows_version}"
+          if [ -f "${installer}" ]; then
+            if ! gh release view "${windows_tag}" >/dev/null 2>&1; then
+              gh release create "${windows_tag}"                 --target main                 --title "ProjektZeit ${windows_version}"                 --notes "ProjektZeit ${windows_version}. Installation und Prüfsumme; der Anwendungsquellcode bleibt im privaten Source-Repository."
+            fi
+            if [ -f SHA256SUMS.txt ]; then
+              gh release upload "${windows_tag}" "${installer}" SHA256SUMS.txt --clobber
+            else
+              gh release upload "${windows_tag}" "${installer}" --clobber
+            fi
+          fi
