@@ -1,0 +1,48 @@
+name: One-time import ProjektZeit 1.0.8
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/manual-import-1.0.8.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout public repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Import prepared public package
+        shell: bash
+        env:
+          PACKAGE_URL: "https://sdmntprdenmarkeast.oaiusercontent.com/files/00000000-ddd4-8210-9ade-21c716fc3861/raw?se=2026-10-05T07%3A00%3A19Z&sp=r&sv=2026-02-06&sr=b&scid=d69eb1dc-53da-53cf-b815-5f74fac85811&skoid=d294dba5-36f7-432b-aab8-935656489847&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-05T06%3A06%3A23Z&ske=2026-10-06T06%3A06%3A23Z&sks=b&skv=2026-02-06&sig=UKIjVf%2BBKpVOGnKTke/I/EdTv8fRbRqW%2Blo3zQf9kn8%3D"
+        run: |
+          set -euo pipefail
+          curl -fL "${PACKAGE_URL}" -o /tmp/projektzeit-public.zip
+          mkdir -p /tmp/projektzeit-public
+          unzip -q /tmp/projektzeit-public.zip -d /tmp/projektzeit-public
+
+          rm -f ProjektZeit-Setup-*.exe
+          cp /tmp/projektzeit-public/CHANGELOG.md .
+          cp /tmp/projektzeit-public/LICENSE.md .
+          cp /tmp/projektzeit-public/README.md .
+          cp /tmp/projektzeit-public/compatibility.json .
+          cp /tmp/projektzeit-public/SHA256SUMS.txt .
+          cp /tmp/projektzeit-public/docker-compose.yml .
+          cp /tmp/projektzeit-public/version.json .
+          cp /tmp/projektzeit-public/ProjektZeit-Setup-1.0.8.exe .
+          sed -i 's/^PROJEKTZEIT_VERSION=.*/PROJEKTZEIT_VERSION=1.0.8/' .env.example
+
+          rm -f .github/workflows/manual-import-1.0.8.yml
+
+          git config user.name "ProjektZeit Release Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "Release 1.0.8"
+          git push origin HEAD:main
