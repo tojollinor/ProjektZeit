@@ -1,5 +1,18 @@
 # Changelog
 
+## ProjektZeit 1.0.8 — 2026-10-05
+
+- Completed the second UI/UX live-review round across desktop and mobile.
+- Applied system dark mode before login and separated product branding from PWA/app icons.
+- Reworked navigation, persistent desktop sidebar, Admin-Optionen, settings and notification navigation.
+- Made master-data tables use the available width and moved entity details into accessible dialogs.
+- Improved work-time selection layout, dashboard period controls, chart date axes and timeline detail dialogs.
+- Added calendar day and event detail views including descriptions and series information.
+- Made personal expenses directly reachable without exposing bookkeeping navigation to normal users.
+- Hardened attachment uploads, previews, downloads, deletion, MIME/signature validation and repeated uploads for supported business objects.
+- Expanded release-gate E2E coverage for security headers, PWA manifest, dynamic version reporting, table width, sidebar scrolling and responsive overflow.
+- Made the closed-posting-period regression test independent of the current calendar month.
+
 ## ProjektZeit 1.0.7 — 2026-09-23
 
 - Replaced remaining PZ placeholders with the ProjektZeit product logo and completed PWA/browser icon branding.
