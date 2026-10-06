@@ -39,6 +39,16 @@ Official Windows releases contain a normal installer, not a portable application
 
 Global Zammad, STARFACE and TeamViewer configuration is managed by administrators. Users connect their personal external accounts separately. Personal tokens are not exposed to administrators. Provider rate limits are only applied when the provider documents an actual limit; ProjectZeit has no artificial global API throttle.
 
+## Container channels
+
+The public container image is `ghcr.io/tojollinor/projektzeit`.
+
+- `latest` is the stable channel. It is updated only after the matching release commit has passed the complete CI and release checks.
+- `latest-beta` is the newest release candidate and can move before the full validation suite has completed.
+- Fixed version tags such as `1.0.9` remain available for reproducible deployments.
+
+Normal production deployments should use a fixed version or `latest`. Use `latest-beta` only when you intentionally want the newest candidate.
+
 ## Updates
 
 Server updates are performed through the normal container deployment process. The application does not self-update its server. The Windows client checks compatibility before installing an update.
