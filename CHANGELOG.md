@@ -1,5 +1,15 @@
 # Changelog
 
+## ProjektZeit 1.0.9 — 2026-10-06
+
+- Stabilized product-logo rendering on login and product surfaces without replacing the approved branding asset.
+- Reworked the workday panel into a collapsible live status surface with second-by-second work, pause and order timers and no manual refresh action.
+- Added permission-aware <Neuer …> choices for customers, projects, orders and time categories while reusing the existing creation workflows.
+- Modernized order search and added a dedicated mobile order-card view with project, customer, status, responsibility and contextual actions.
+- Removed sticky status behavior on mobile and kept entity details in full-height mobile dialogs with a persistent bottom close action.
+- Normalized common action-button sizing, spacing and responsive grouping across desktop and mobile.
+- Extended frontend and desktop/mobile E2E regression coverage for the new workday, quick-create, mobile order and dialog-footer behavior.
+
 ## ProjektZeit 1.0.8 — 2026-10-05
 
 - Completed the second UI/UX live-review round across desktop and mobile.
