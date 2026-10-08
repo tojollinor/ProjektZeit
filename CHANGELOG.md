@@ -1,5 +1,16 @@
 # Changelog
 
+## ProjektZeit 1.0.10 — 2026-10-07
+
+- Removed the misleading hardcoded server-version fallback; runtime version is now read from the installed package or an explicit non-empty override and fails visibly when neither is available.
+- Unified ProjektZeit branding across the Windows window, sidebar, tray and installer while keeping the approved web branding unchanged.
+- Compacted the live work-status strip so status and running time share one clear line.
+- Reworked dashboard navigation and management: real dashboard names remain in the main tabs, creation/copy/share/delete actions live in management, and Dashboard categories distinguish Mein Dashboard, Buchhaltung, System and Admin.
+- Added reusable page-information actions and persistent dialog footers with explicit Schließen actions.
+- Modernized Zeiten & Korrekturen with compact adjacent filters, rounded controls and clearer session, order-time and history panels.
+- Modernized customer search and replaced the mobile customer table with fixed-width customer cards to prevent horizontal page scrolling.
+- Expanded frontend, server and E2E regression coverage for the 1.0.10 UX and versioning changes.
+
 ## ProjektZeit 1.0.9 — 2026-10-06
 
 - Stabilized product-logo rendering on login and product surfaces without replacing the approved branding asset.
