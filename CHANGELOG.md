@@ -1,5 +1,17 @@
 # Changelog
 
+## ProjektZeit 1.0.12 — 2026-10-08
+
+- Refined the compact work-status panel with the active order-time clock and concise order, project and customer context.
+- Improved pause and order-time controls: the chooser disappears during breaks and mutually exclusive start/stop actions are no longer displayed together.
+- Added touch pinch zoom from 1× to 8× to the timeline and hours-development chart while preserving horizontal scrolling.
+- Recovered valid PWA install icons (192/512 px), updated the service worker cache and expanded installability checks.
+- Added read-only customer details until explicitly entering edit mode, quick details for selected entities and modal creation workflows with persistent actions.
+- Made quick creation of customers, projects, orders and time categories context-aware, with list refresh and direct selection after saving.
+- Modernized the mobile projects overview with responsive, tappable cards, a consistent status layout and customer-style search.
+- Expanded automated frontend, server and desktop/mobile regression coverage.
+- Deferred replacement of the header master logo until an approved original asset is available; existing logo usage remains unchanged.
+
 ## ProjektZeit 1.0.11 — 2026-10-08
 
 - Unified input/search field feedback and made the compact work-status strip fully interactive, including keyboard support and a visible expand control.
