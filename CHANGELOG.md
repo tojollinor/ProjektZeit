@@ -1,5 +1,17 @@
 # Changelog
 
+## ProjektZeit 1.0.11 — 2026-10-08
+
+- Unified input/search field feedback and made the compact work-status strip fully interactive, including keyboard support and a visible expand control.
+- Moved ProjektZeit Web branding and the DEMO marker to the header while improving the compact sidebar, version badge and expand control.
+- Separated Dashboard widget editing (pencil) from dashboard management (gear), retaining personal layouts, sharing and existing permission rules.
+- Replaced multiple period controls with one picker for days, ISO calendar weeks, months and years, including bounded date ranges across years.
+- Improved the Arbeitszeit Soll/Ist summary with actual/target values, progress and deviations while retaining the existing balance, order and comparison statistics.
+- Added a subtle line marking the current day in the daily trend chart.
+- Separated the Compose image tag (PROJEKTZEIT_IMAGE_TAG) from the server product version so package metadata remains authoritative.
+- Extended frontend, backend and desktop/mobile regression coverage.
+
+
 ## ProjektZeit 1.0.10 — 2026-10-07
 
 - Removed the misleading hardcoded server-version fallback; runtime version is now read from the installed package or an explicit non-empty override and fails visibly when neither is available.

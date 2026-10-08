@@ -16,7 +16,7 @@ services:
       retries: 10
 
   projektzeit:
-    image: ghcr.io/tojollinor/projektzeit:${PROJEKTZEIT_VERSION:-latest}
+    image: ghcr.io/tojollinor/projektzeit:${PROJEKTZEIT_IMAGE_TAG:-latest}
     container_name: projektzeit
     restart: unless-stopped
     ports:
@@ -24,7 +24,6 @@ services:
     environment:
       APP_URL: ${APP_URL}
       APP_SECRET_KEY: ${APP_SECRET_KEY}
-      PROJEKTZEIT_VERSION: ${PROJEKTZEIT_VERSION}
       DATABASE_URL: postgresql+psycopg://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
       STORAGE_PATH: /data/files
       BOOTSTRAP_ADMIN_FIRST_NAME: ${BOOTSTRAP_ADMIN_FIRST_NAME}
