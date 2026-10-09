@@ -1,5 +1,14 @@
 # Changelog
 
+## ProjektZeit 1.0.13 — 2026-10-09
+
+- Linked dashboard time-series aggregation to the selected day, ISO-week, month or year period, removing the redundant monthly aggregation checkbox.
+- Moved hours-development chart boundary values to the right side while keeping pinch zoom.
+- Replaced general dashboard data-widget tables, including employee hours in Buchhaltung, with compact responsive cards and full record detail dialogs. Added a consistent inline search with reset and readable, rounded hour values.
+- Updated the dashboard period regression expectation for the controlled selector.
+- Integrated the approved original logo into Web/PWA, Windows and installer builds through checksum-verified branding assets, refreshing the PWA cache.
+
+
 ## ProjektZeit 1.0.12 — 2026-10-08
 
 - Refined the compact work-status panel with the active order-time clock and concise order, project and customer context.

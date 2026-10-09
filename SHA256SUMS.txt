@@ -1,1 +1,1 @@
-02e8005bc4ee10075594f01537bb9b2750da6baf963efd8e91f402312f73bd5f  ProjektZeit-Setup-1.0.12.exe
+3d81f1fd1ee3e35bcab3cf24e4e7bd8f7fbf633685fd08982a1578432df2f5b0  ProjektZeit-Setup-1.0.13.exe
