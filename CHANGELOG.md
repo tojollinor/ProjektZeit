@@ -1,5 +1,18 @@
 # Changelog
 
+## ProjektZeit 1.0.14 — 2026-10-10
+
+- Made the desktop dashboard grid responsive and tightened widget layouts for employee hours, accounting summaries and empty states without overwriting saved preferences.
+- Removed fixed minimum widths from the hours-development graph and daily timeline at 1×; adjusted axis-label density to the available width while retaining internal zoom and scrolling.
+- Clarified selected dashboard date ranges directly on the period button; distinguished current hour-account balances from period-specific actual, target and deviation values.
+- Standardized German hour displays with up to two decimal places, formatted selected detailed durations as hours/minutes, and prevented line breaks between numeric values and units.
+- Moved the product identity to the desktop sidebar, leaving only the icon when collapsed and in the mobile header; distinguished navigation icons and improved secondary header/version readability.
+- Offered Windows users a choice between PWA and Windows client installation, and PWA-only on other systems; preserved dismissal preferences.
+- Enhanced login with a password-visibility toggle and an unobtrusive account-access hint.
+- Shortened search placeholders while retaining search/reset controls; moved diagnostic IDs into collapsible technical detail sections across the dashboards, timeline and master data.
+- Added and updated Web, server-independent UI and desktop/mobile regression tests; real multi-touch/pinch gesture acceptance remains deferred until a capable test environment is available.
+
+
 ## ProjektZeit 1.0.13 — 2026-10-09
 
 - Linked dashboard time-series aggregation to the selected day, ISO-week, month or year period, removing the redundant monthly aggregation checkbox.
