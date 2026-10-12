@@ -1,5 +1,16 @@
 # Changelog
 
+## ProjektZeit 1.0.15 — 2026-10-12
+
+- Corrected the compact live work-status bar: work-time clock only on the left, customer/project/order stacked on the right, with order time and actions available when expanded.
+- Fixed mobile app-logo positioning beside the menu while retaining the approved desktop sidebar branding.
+- Split Times & Corrections into Working Times and Order Times, with independent audited segments, optional notes, and authorized corrections or deletions.
+- Introduced a searchable own-open-orders picker and atomic order switching, separating stopping an interval from explicitly completing the order.
+- Added optional, permission-scoped STARFACE call and TeamViewer session suggestions during order completion and before billing; selected evidence never adds duplicate billable time.
+- Reworked customer master data into companies, sites and contacts with multiple categorized phone numbers, individual addresses, tax IDs, searchable site assignments and optional separate billing addresses.
+- Preserved historical customer addresses, contact numbers and integration links through a data-retaining database migration, and hardened read-only permissions in the customer dialogs.
+- Expanded automated frontend, API, migration and desktop/mobile regression coverage; multi-touch acceptance remains deferred pending a supported test environment.
+
 ## ProjektZeit 1.0.14 — 2026-10-10
 
 - Made the desktop dashboard grid responsive and tightened widget layouts for employee hours, accounting summaries and empty states without overwriting saved preferences.
