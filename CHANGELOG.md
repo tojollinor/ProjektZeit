@@ -1,5 +1,15 @@
 # Changelog
 
+## ProjektZeit 1.0.16 — 2026-10-17
+
+- Added day, week, month, year and custom-range views for working and order times, including a month calendar, period list and permission-aware employee-wide change history with before/after audit details.
+- Modernized customer, site and contact forms with consistent autofill-aware fields, clearer archive controls and persistent dialog actions.
+- Centralized multiple named TeamViewer IDs per customer with optional links to sites and contacts, preserving existing assignments and auditability.
+- Improved attachment lists and viewers with compact responsive actions, proportional image previews, PDF fit/zoom/navigation and persistent download controls with a clear fallback when embedded preview is unavailable.
+- Added a separate permission for closing another employee's order, with server-side authorization, confirmation and audit logging, independent from permission to edit that order.
+- Refined the compact desktop work-status bar: work-time clock on the left, customer/project/order details stacked on the right and the collapse control at the far edge, while preserving the three-stage controls and mobile layout.
+- Expanded API, UI, migration and desktop/mobile regression coverage. Real multi-touch acceptance remains deferred until a suitable test environment is available.
+
 ## ProjektZeit 1.0.15 — 2026-10-12
 
 - Corrected the compact live work-status bar: work-time clock only on the left, customer/project/order stacked on the right, with order time and actions available when expanded.
