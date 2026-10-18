@@ -1,5 +1,17 @@
 # Changelog
 
+## ProjektZeit 1.0.17 — 2026-10-18
+
+- Refined dashboard summaries and visualization colors; improved desktop density and consistent management lists while preserving responsive mobile layouts.
+- Modernized work-time correction history, audit details and modal interactions for clearer before/after records.
+- Expanded bookkeeping and employee expenses with approval, deferral and single-booking reimbursement safeguards.
+- Reworked administration of users and roles into searchable lists and dialogs with readable permission switches and safe unsaved-change handling.
+- Simplified account settings into a compact effective-role detail view; improved notification navigation and compact message layout.
+- Added chart-local two-finger zoom on mobile and mouse-wheel zoom on desktop without enabling page zoom on mobile.
+- Expanded synthetic demo records across customers, locations, contacts, employees, roles, projects, orders, work times, expenses, calls, tickets, TeamViewer sessions, calendar, absences, billing, on-call and notifications.
+- Strengthened schema migration, security and desktop/mobile regression tests.
+
+
 ## ProjektZeit 1.0.16 — 2026-10-17
 
 - Added day, week, month, year and custom-range views for working and order times, including a month calendar, period list and permission-aware employee-wide change history with before/after audit details.
