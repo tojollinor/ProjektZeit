@@ -1,5 +1,13 @@
 # Changelog
 
+## ProjektZeit 1.0.18 — 2026-10-18
+
+- Fixed startup on PostgreSQL 17 by using a short Alembic revision identifier for the employee reimbursement migration, within the database's 32-character limit.
+- Preserved compatibility with SQLite installations that had recorded the longer 1.0.17 revision identifier.
+- Added a PostgreSQL integration regression test for the complete schema migration path from 1.0.16 to 1.0.18, including repeat-safe startup and checks for revision identifier length.
+- Includes all previously published 1.0.17 features and fixes.
+
+
 ## ProjektZeit 1.0.17 — 2026-10-18
 
 - Refined dashboard summaries and visualization colors; improved desktop density and consistent management lists while preserving responsive mobile layouts.
