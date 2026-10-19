@@ -1,5 +1,18 @@
 # Changelog
 
+## ProjektZeit 1.0.19 — 2026-10-19 (Beta)
+
+- Dashboard: detailed trend and period views, clearer performance billing ring chart.
+- Billing: compact records, customer/status search, approval and correction actions in detail dialogs.
+- Working time: consistent list, calendar and compact two-line history views and drilldowns.
+- Unified immutable audit history with filtered area, record and before/after detail views, export and permission checks.
+- Customer management: compact scrolling list, paired responsive detail cards, sequential configurable customer numbers, a single main site.
+- Consistent project/order status indicators and action columns.
+- Unified monthly calendars, accounting employee/day overview and a browsable monthly employee matrix.
+- Expanded connected demo data across twelve months, 42 orders, generated PDFs/images and nine editable work models including the administrator's 40-hour weekly schedule.
+- Expanded regression coverage and corrected the company-timezone default for new work model validity.
+
+
 ## ProjektZeit 1.0.18 — 2026-10-18
 
 - Fixed startup on PostgreSQL 17 by using a short Alembic revision identifier for the employee reimbursement migration, within the database's 32-character limit.
