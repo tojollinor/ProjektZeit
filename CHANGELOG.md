@@ -1,5 +1,17 @@
 # Changelog
 
+## ProjektZeit 1.0.20 — 2026-10-20 (Beta)
+
+- Globale kompakte Scrolllisten und Filter in Kunden-, Projekt-, Auftrags- und Mitarbeiterverwaltung.
+- Eindeutige, verpflichtende Kundennummern einschließlich Demodaten, CSV-Import und Bestandsmigration.
+- Einheitliche deutsche Statusbezeichnungen und Statusindikatoren.
+- Kompakte Arbeits- und Auftragszeitlisten mit vollständiger Bereichs- und Datensatzhistorie.
+- Vereinheitlichte Monatskalender und getrennte Termine-/Abwesenheitsverwaltung.
+- Abwesenheitskonflikte bei der Terminplanung mit datenschutzgerechten Belegungsanzeigen; Agenda als Dashboard-Widget.
+- Einheitliche Eingabefelder, Kachelaktionen sowie thematische Untermenüs für Einstellungen und Adminoptionen.
+- Verknüpfte Demodaten, vollständige Audit- und Löschhistorien und erweiterte Regressionstests.
+
+
 ## ProjektZeit 1.0.19 — 2026-10-19 (Beta)
 
 - Dashboard: detailed trend and period views, clearer performance billing ring chart.

@@ -1,1 +1,1 @@
-a89f3aefaad0320c19dcf523152fc1ac4f92a7b5284bf8c22d458e0d7be34b8d  ProjektZeit-Setup-1.0.19.exe
+870f15ff176325dec6971b8caef6b078cd3a785da3f69b360b377ec6ed248f4c  ProjektZeit-Setup-1.0.20.exe
